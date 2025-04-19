@@ -12,3 +12,19 @@ export const getAllEmployees=async(req,res)=>{
         return res.status(500).json({message:"Internal server error"})
     }
 }
+
+export const addEmployee=async(req,res)=>{
+    const {name,email,designation,empId}=req.body;
+    try {
+        const employee=await UserModel.findOne({where:{empId:empId}});
+        if(!employee){
+            await UserModel.create(req.body);
+            return res.status(201).json({message:"Employee added successfully"})
+        }
+        return res.status(200).json({message:"Employee already found"})
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({message:"Internal server error"})
+    }
+}
