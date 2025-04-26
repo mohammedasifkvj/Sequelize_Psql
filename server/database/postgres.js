@@ -1,7 +1,11 @@
 import {Sequelize} from 'sequelize';
+import dotenv from "dotenv";
+
+dotenv.config();
+
 import { createUserModel } from '../model/userSchema.js';
 // Option 3: Passing parameters separately (other dialects)
-const sequelize = new Sequelize('postgres', 'postgres', process.env.POSTGRESQL_PASSWORD, {
+const sequelize = new Sequelize(process.env.DATA_BASE,process.env.DB_USERNAME, process.env.POSTGRESQL_PASSWORD, {
     host: 'localhost',
     dialect:  'postgres'
     /*one of 'mysql'|'sqlite'| 'mariadb'| 'mssql'| 'db2'| 'snowflake'| 'oracle' */
